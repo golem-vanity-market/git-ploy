@@ -6,6 +6,8 @@ p = os.path.abspath(repository_path)
 repository_name = environ.get("GITPLOY_REPOSITORY_NAME", os.path.basename(p))
 USER_TO_INSTALL_SERVICE = environ.get("GITPLOY_USER", "ubuntu")
 
+os.system("curl -sSL https://raw.githubusercontent.com/golem-vanity-market/git-ploy/refs/heads/main/gitploy.py --output gitploy.py")
+
 SERVICE_LOCATION = f"/etc/systemd/system/{repository_name}-gitploy.service"
 print(f"Repository root to install service: {p}")
 
@@ -45,4 +47,3 @@ os.system(f"sudo systemctl enable {repository_name}-gitploy.service")
 print("Starting the autoupdate service...")
 os.system(f"sudo systemctl start {repository_name}-gitploy.service")
 
-os.system("curl -sSL https://raw.githubusercontent.com/golem-vanity-market/git-ploy/refs/heads/main/gitploy.py --output gitploy.py")
