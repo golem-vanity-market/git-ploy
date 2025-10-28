@@ -6,7 +6,8 @@ p = os.path.abspath(repository_path)
 repository_name = environ.get("GITPLOY_REPOSITORY_NAME", os.path.basename(p))
 USER_TO_INSTALL_SERVICE = environ.get("GITPLOY_USER", "ubuntu")
 
-os.system("curl -sSL https://raw.githubusercontent.com/golem-vanity-market/git-ploy/refs/heads/main/gitploy.py --output gitploy.py")
+print(f"Downloading the latest gitploy.py to {p}...")
+os.system("curl -H 'Cache-Control: no-cache' -sSL https://raw.githubusercontent.com/golem-vanity-market/git-ploy/refs/heads/main/gitploy.py --output gitploy.py")
 
 SERVICE_LOCATION = f"/etc/systemd/system/{repository_name}-gitploy.service"
 print(f"Repository root to install service: {p}")
