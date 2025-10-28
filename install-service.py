@@ -6,10 +6,12 @@ p = os.path.abspath(repository_path)
 repository_name = environ.get("GITPLOY_REPOSITORY_NAME", os.path.basename(p))
 USER_TO_INSTALL_SERVICE = environ.get("GITPLOY_USER", "ubuntu")
 
-SERVICE_LOCATION = f"/etc/systemd/system/{repository_name}-autoupdate.service"
+SERVICE_LOCATION = f"/etc/systemd/system/{repository_name}-gitploy.service"
 print(f"Repository root to install service: {p}")
 
 service_content = f"""
+# Service installed from https://raw.githubusercontent.com/golem-vanity-market/git-ploy
+
 [Unit]
 Description=Autoupdate service for {repository_name}
 After=network.target
@@ -18,7 +20,7 @@ After=network.target
 Type=simple
 User=ubuntu
 WorkingDirectory={p}
-ExecStart=/usr/bin/python3 -u autoupdate.py
+ExecStart=/usr/bin/python3 -u gitploy.py
 Restart=on-failure
 RestartSec=120
 # Allow sudo to elevate, only use these settings in administrative scripts
@@ -39,8 +41,8 @@ print(f"Service file written to {SERVICE_LOCATION}")
 print("Reloading systemd daemon...")
 os.system("sudo systemctl daemon-reload")
 print("Enabling the autoupdate service...")
-os.system(f"sudo systemctl enable {repository_name}-autoupdate.service")
+os.system(f"sudo systemctl enable {repository_name}-gitploy.service")
 print("Starting the autoupdate service...")
-os.system(f"sudo systemctl start {repository_name}-autoupdate.service")
+os.system(f"sudo systemctl start {repository_name}-gitploy.service")
 
 os.system("curl -sSL https://raw.githubusercontent.com/golem-vanity-market/git-ploy/refs/heads/main/gitploy.py --output gitploy.py")
