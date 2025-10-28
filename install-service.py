@@ -11,6 +11,12 @@ os.system("curl -sSL https://raw.githubusercontent.com/golem-vanity-market/git-p
 SERVICE_LOCATION = f"/etc/systemd/system/{repository_name}-gitploy.service"
 print(f"Repository root to install service: {p}")
 
+print("Stopping service if exists...")
+os.system(f"sudo systemctl stop {repository_name}-gitploy.service")
+print("Disable service if exists...")
+os.system(f"sudo systemctl disable {repository_name}-gitploy.service")
+
+
 service_content = f"""
 # Service installed from https://raw.githubusercontent.com/golem-vanity-market/git-ploy
 
