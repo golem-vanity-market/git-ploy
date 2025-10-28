@@ -53,4 +53,4 @@ os.system(f"sudo systemctl enable {repository_name}-gitploy.service")
 print("Starting the autoupdate service...")
 os.system(f"sudo systemctl start {repository_name}-gitploy.service")
 
-print("Run: journalctl -u {repository_name}-gitploy.service -f to see the service logs.")
+print(f"Run: journalctl -u {repository_name}-gitploy.service -f to see the service logs.")

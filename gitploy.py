@@ -46,7 +46,7 @@ def main():
     last_output = None
     while True:
         print("Running git pull...")
-        output, error, code = run_command(["git", "pull"])
+        output, error, code = run_command("git pull")
 
         if code != 0:
             print(f"[ERROR] git pull failed:\n{error}")
