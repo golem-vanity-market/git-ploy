@@ -55,3 +55,5 @@ print("Starting the autoupdate service...")
 os.system(f"sudo systemctl start {repository_name}-gitploy.service")
 
 print(f"Run: journalctl -u {repository_name}-gitploy.service -f to see the service logs.")
+
+print("To check if autoupdater works correctly run: git reset --hard HEAD^ (warning to not lost changes)")
