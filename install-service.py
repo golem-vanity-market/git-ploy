@@ -1,4 +1,5 @@
 import os.path
+import time
 from os import environ
 
 repository_path = environ.get("GITPLOY_REPOSITORY_ROOT", ".")
@@ -53,6 +54,10 @@ print("Enabling the autoupdate service...")
 os.system(f"sudo systemctl enable {repository_name}-gitploy.service")
 print("Starting the autoupdate service...")
 os.system(f"sudo systemctl start {repository_name}-gitploy.service")
+
+time.sleep(1)
+
+os.system(f"sudo systemctl status {repository_name}-gitploy.service")
 
 print(f"Run: journalctl -u {repository_name}-gitploy.service -f to see the service logs.")
 
