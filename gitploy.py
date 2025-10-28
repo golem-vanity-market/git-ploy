@@ -12,10 +12,12 @@ else:
 
 UPDATE_EVERY_SECS = int(environ.get("GITPLOY_UPDATE_EVERY_SECS", "60"))
 
+
 def run_command(command):
     """Run a shell command and return its output, error, and exit code."""
     result = subprocess.run(command, shell=True, capture_output=True, text=True)
     return result.stdout.strip(), result.stderr.strip(), result.returncode
+
 
 def stream_process(command):
     """Run a command and stream its stdout and stderr in real time."""
@@ -39,6 +41,7 @@ def stream_process(command):
     process.wait()
     return process.returncode
 
+
 def main():
     last_output = None
     while True:
@@ -57,6 +60,7 @@ def main():
             last_output = output
 
         time.sleep(UPDATE_EVERY_SECS)
+
 
 if __name__ == "__main__":
     main()
